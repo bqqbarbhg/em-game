@@ -28,6 +28,7 @@ workspace "em-game"
 
 	filter "action:vs*"
 		defines { "_CRT_SECURE_NO_WARNINGS" }
+		systemversion(os.winSdkVersion() .. ".0")
 
 	filter "configurations:debug"
 		defines { "DEBUG" }
@@ -48,9 +49,6 @@ workspace "em-game"
 
 	filter "platforms:x64"
 		architecture "x86_64"
-
-	filter {"system:windows", "action:vs*"}
-		systemversion(os.winSdkVersion() .. ".0")
 
 project "base"
 	kind "StaticLib"
