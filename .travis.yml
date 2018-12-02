@@ -1,0 +1,35 @@
+sudo: false
+
+language: cpp
+
+compiler:
+    - gcc
+    - clang
+
+cache:
+    apt: true
+    packages: true
+    directories:
+        - premake_build
+
+addons:
+    apt:
+        packages:
+            - g++-multilib
+
+env:
+    - CONFIGURATION=debug_x86
+    - CONFIGURATION=debug_x64
+    - CONFIGURATION=release_x86
+    - CONFIGURATION=release_x64
+
+install:
+    - ./install-premake.sh
+
+before_script:
+    - premake_build/premake5 gmake
+
+script:
+    - make -C build config=$CONFIGURATION
+    - bin/$CONFIGURATION/test
+
