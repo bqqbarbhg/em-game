@@ -24,7 +24,7 @@ env:
     - CONFIGURATION=release_x64
 
 install:
-    - ./install-premake.sh
+    - bash install-premake.sh
 
 before_script:
     - premake_build/premake5 gmake
