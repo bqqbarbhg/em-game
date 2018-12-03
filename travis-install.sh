@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 if [ ! -f travis_build/premake5 ]; then
 	mkdir -p travis_build
 	cd travis_build
@@ -11,18 +12,29 @@ if [ ! -f travis_build/premake5 ]; then
 	cd ..
 fi
 
-if [ ! -d travis_build/emsdk ]; then
-	mkdir -p travis_build
-	cd travis_build
-	git clone https://github.com/juj/emsdk.git
-	cd emsdk
+if [ "$ARCH" == "js" ]; then
 
-	./emsdk install latest
-	./emsdk activate latest
+	if [ ! -d travis_build/emsdk ]; then
+		mkdir -p travis_build
+		cd travis_build
+		git clone https://github.com/juj/emsdk.git
+		cd emsdk
 
-	cd ../..
-fi
+		./emsdk install latest
+		./emsdk activate latest
 
-source travis_build/emsdk/emsdk_env.sh
+		cd ../..
+	fi
+
+	source travis_build/emsdk/emsdk_env.sh
+
+	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+
+	export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+	nvm install node
+
+fi # ARCH == "js"
 
 
