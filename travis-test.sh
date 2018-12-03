@@ -1,5 +1,8 @@
 
-source travis_build/emsdk/emsdk_env.sh
+if [ "$ARCH" == "js" ]; then
+	travis_build/emsdk/emsdk activate latest
+	source travis_build/emsdk/emsdk_env.sh
+fi
 
 make -C build config=${CONFIG}_${ARCH}
 
