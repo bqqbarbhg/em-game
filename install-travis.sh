@@ -13,6 +13,7 @@ fi
 
 if [ ! -d travis_build/emsdk ]; then
 	mkdir travis_build
+	cd travis_build
 	git clone https://github.com/juj/emsdk.git
 	cd emsdk
 
