@@ -21,12 +21,11 @@ if [ "$ARCH" == "js" ]; then
 		cd emsdk
 
 		./emsdk install latest
-		./emsdk activate latest
 
 		cd ../..
 	fi
 
-	source travis_build/emsdk/emsdk_env.sh
+	./emsdk activate latest
 
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
