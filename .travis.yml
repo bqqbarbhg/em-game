@@ -20,7 +20,7 @@ env:
     - CONFIGURATION=debug
     - CONFIGURATION=release
 
-matrix:
+jobs:
     include:
         - name: Native
           script:
