@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 if [ ! -f travis_build/premake5 ]; then
-	mkdir travis_build
+	mkdir -p travis_build
 	cd travis_build
 	wget https://github.com/premake/premake-core/releases/download/v5.0.0-alpha12/premake-5.0.0-alpha12-src.zip -O premake.zip
 	unzip -qq premake.zip
@@ -12,7 +12,7 @@ if [ ! -f travis_build/premake5 ]; then
 fi
 
 if [ ! -d travis_build/emsdk ]; then
-	mkdir travis_build
+	mkdir -p travis_build
 	cd travis_build
 	git clone https://github.com/juj/emsdk.git
 	cd emsdk
