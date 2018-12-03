@@ -17,23 +17,16 @@ addons:
             - g++-multilib
 
 env:
-    - CONFIGURATION=debug
-    - CONFIGURATION=release
-
-jobs:
-    include:
-        - name: Native
-          script:
-            - make -C build config=${CONFIGURATION}_x64
-            - bin/${CONFIGURATION}_x64/test
-        - name: Emscripten
-          script:
-            - source travis_build/emsdk/emsdk_env.sh
-            - make -C build config=${CONFIGURATION}_js
+    - CONFIG=debug
+    - CONFIG=release
+    - ARCH=x64
+    - ARCH=js
 
 install:
-    - bash install-travis.sh
+    - bash travis-install.sh
 
 before_script:
     - travis_build/premake5 gmake
+
+script: bash travis-test.sh
 
