@@ -60,6 +60,8 @@ project "base"
 	kind "StaticLib"
 	language "C++"
 	files { "src/base/**.h", "src/base/**.cpp" }
+	pchheader "base/Precompiled.h"
+	pchsource "src/base/Precompiled.cpp"
 
 project "test"
 	kind "ConsoleApp"
