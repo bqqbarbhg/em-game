@@ -22,12 +22,14 @@ env:
 
 matrix:
     include:
-        - script:
+        - name: Native
+          script:
+            - make -C build config=${CONFIGURATION}_x64
+            - bin/${CONFIGURATION}_x64/test
+        - name: Emscripten
+          script:
             - source travis_build/emsdk/emsdk_env.sh
             - make -C build config=${CONFIGURATION}_js
-        - script:
-            - make -C build config=${CONFIGURATION}_x64
-            - bin/$CONFIGURATION/test
 
 install:
     - bash install-travis.sh
