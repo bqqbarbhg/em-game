@@ -17,18 +17,21 @@ addons:
             - g++-multilib
 
 env:
-    - CONFIGURATION=debug_x64
-    - CONFIGURATION=debug_js
-    - CONFIGURATION=release_x64
-    - CONFIGURATION=release_js
+    - CONFIGURATION=debug
+    - CONFIGURATION=release
+
+matrix:
+    include:
+        - script:
+            - source travis_build/emsdk/emsdk_env.sh
+            - make -C build config=${CONFIGURATION}_js
+        - script:
+            - make -C build config=${CONFIGURATION}_x64
+            - bin/$CONFIGURATION/test
 
 install:
     - bash install-travis.sh
 
 before_script:
     - travis_build/premake5 gmake
-
-script:
-    - make -C build config=$CONFIGURATION
-    - bin/$CONFIGURATION/test
 
