@@ -10,7 +10,7 @@ cache:
     apt: true
     packages: true
     directories:
-        - premake_build
+        - travis_build
 
 addons:
     apt:
@@ -26,10 +26,10 @@ env:
     - CONFIGURATION=release_js
 
 install:
-    - bash install-premake.sh
+    - bash install-travis.sh
 
 before_script:
-    - premake_build/premake5 gmake
+    - travis_build/premake5 gmake
 
 script:
     - make -C build config=$CONFIGURATION
