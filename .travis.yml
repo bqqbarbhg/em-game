@@ -17,10 +17,10 @@ addons:
             - g++-multilib
 
 env:
-    - CONFIG=debug
-    - CONFIG=release
-    - ARCH=x64
-    - ARCH=js
+    - CONFIG=debug ARCH=x64
+    - CONFIG=release ARCH=x64
+    - CONFIG=debug ARCH=js
+    - CONFIG=release ARCH=js
 
 install:
     - bash travis-install.sh
