@@ -1,3 +1,5 @@
+require("./emscripten")
+
 function os.winSdkVersion()
 	local reg_arch = iif( os.is64bit(), "\\Wow6432Node\\", "\\" )
 	local sdk_version = os.getWindowsRegistry( "HKLM:SOFTWARE" .. reg_arch .."Microsoft\\Microsoft SDKs\\Windows\\v10.0\\ProductVersion" )
@@ -14,8 +16,8 @@ function symbols_on()
 end
 
 workspace "em-game"
-	configurations { "debug", "release", "final_release" }
-	platforms { "x86", "x64" }
+	configurations { "debug", "develop", "release" }
+	platforms { "x86", "x64", "js" }
 	location "build"
 	includedirs { "src" }
 	targetdir "bin/%{cfg.buildcfg}_%{cfg.platform}"
@@ -35,12 +37,12 @@ workspace "em-game"
 		defines { "DEBUG" }
 		symbols_on()
 
-	filter "configurations:release"
+	filter "configurations:develop"
 		defines { "NDEBUG" }
 		optimize "On"
 		symbols_on()
 
-	filter "configurations:final_release"
+	filter "configurations:relase"
 		defines { "NDEBUG" }
 		optimize "On"
 		flags { "LinkTimeOptimization" }
@@ -50,6 +52,9 @@ workspace "em-game"
 
 	filter "platforms:x64"
 		architecture "x86_64"
+
+	filter "platforms:js"
+		architecture "js"
 
 project "base"
 	kind "StaticLib"
